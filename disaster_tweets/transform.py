@@ -59,6 +59,7 @@ class RemoveHandle(Decorator):
         tweet[u'pretty_text'] = text[trim_length:]
         return tweet
 
+
 def decorate_tweet(tweet, decorators):
     for decorator in decorators:
         try:
