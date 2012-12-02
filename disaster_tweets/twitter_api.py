@@ -25,10 +25,19 @@ class TwitterAPI:
             force_auth_header=True
         )
 
-        return content
+        if resp['status'] != '200':
+            try:
+                error_obj = json.loads(content)
+                formatted_error = json.dumps(error_obj, indent=3)
+                raise 'Twitter API access error: %s\n%s' % (resp['status'], formatted_error)
+            except ValueError:
+                raise 'Twitter API access error: %s\n%s' % (resp['status'], content)
 
-    def get_mentions(self, max_id):
-        mentions_json = self.oauth_req('%s?since_id=%scontributor_details=true' % (MENTIONS_URL, max_id))
-        
-        mentions = json.loads(mentions_json)
+        return (resp, content)
 
+    def get_mentions(self, max_id=1):
+        max_id_param = ''
+        if (max_id > 0):
+            max_id_param = 'since_id=%s&' % max_id
+        (metadata, mentions_json) = self.oauth_req('%s?%scontributor_details=true' % (MENTIONS_URL, max_id_param))
+        return mentions_json
