@@ -8,6 +8,7 @@
 * Google Reverse Geocoder integration if legal means can be found
 * Short code expand to allow for high-density twitter messages
 * Downloading and including image data in final JSON blob for easy integration of imagery
+* Better documentation around setting up and deploying in an operational situation
 
 
 ## License #
