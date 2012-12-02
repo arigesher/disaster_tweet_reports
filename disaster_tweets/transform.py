@@ -1,3 +1,5 @@
+import copy
+
 MISSING_VALUE = '!__MISSING_VALUE__!'
 
 
@@ -34,3 +36,35 @@ def trim_map(src, fields, dst=None):
         else:
             dst[field] = MISSING_VALUE
     return dst
+
+
+class Decorator:
+
+    def __init__(self, name):
+        self.name = name
+
+    def decorate(self, tweet):
+        return tweet
+
+
+class RemoveHandle(Decorator):
+
+    def __init__(self, name, handle):
+        Decorator.__init__(self, name)
+        self.handle = handle
+
+    def decorate(self, tweet):
+        text = tweet[u'text']
+        trim_length = len(self.handle) + 2
+        tweet[u'pretty_text'] = text[trim_length:]
+        return tweet
+
+def decorate_tweet(tweet, decorators):
+    for decorator in decorators:
+        try:
+            scratch_copy = copy.deepcopy(tweet)
+            tweet = decorator.decorate(scratch_copy)
+        except Exception, e:
+            # drop this decorator
+            print 'decorator failed (skipping): %s' % e
+    return tweet
