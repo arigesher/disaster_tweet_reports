@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 #   Copyright 2012 Palantir Technologies
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,27 +14,59 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-import sys
 from disaster_tweets.twitter_api import TwitterAPI
 import json
 from disaster_tweets.transform import trim_tweet
 from disaster_tweets.transform import RemoveHandle
 from disaster_tweets.transform import decorate_tweet
+from disaster_tweets.GoogleReverseGeocoder import GoogleReverseGeocoder
 
+# read the keys from a file (that's not in git)
+execfile('keys.txt')
 
-(consumer_key, consumer_secret, access_token, access_secret, handle) = sys.argv[1:]
-twitter = TwitterAPI(consumer_key, consumer_secret, access_token, access_secret)
+handle = 'gesherapi'
+
+# parameters loaded from keys.txt
+twitter = TwitterAPI(twitter_consumer_key, twitter_consumer_secret, twitter_access_token, twitter_access_secret)
 
 tweets = twitter.get_mentions()
 tweet_objs = json.loads(tweets)
 #print tweet_objs[0]
 #for key in tweet_objs[0]:
 #    print type(key)
-#print json.dumps(tweet_objs[0],indent=3)
+#print json.dumps(tweet_objs[0], indent=3)
 
 #decorators = (RemoveHandle('remove handle', handle), ReverseGeoCode('reverse geocode'))
-decorators = (RemoveHandle('remove handle', handle),)
+decorators = (RemoveHandle('remove handle', handle), GoogleReverseGeocoder())
 
-trimmed_tweets = map(lambda x: trim_tweet(x), tweet_objs)
-decorated_tweets = map(lambda x: decorate_tweet(x, decorators), trimmed_tweets)
-print json.dumps(decorated_tweets, indent=3)
+for tweet in tweet_objs:
+
+    # output then process then output to make errors easier to isolate
+
+    print '==========================================================='
+    print 'Original Tweet:'
+    print ''
+    print json.dumps(tweet, indent=4)
+    print ''
+    print '=== end Original Tweet ===================================='
+    print '==========================================================='
+
+    trimmed_tweet = trim_tweet(tweet)
+
+    print '***********************************************************'
+    print 'Trimmed Tweet:'
+    print ''
+    print json.dumps(trimmed_tweet, indent=4)
+    print ''
+    print '*** end Trimmed Tweet *************************************'
+    print '***********************************************************'
+
+    decorated_tweet = decorate_tweet(trimmed_tweet, decorators)
+
+    print '-----------------------------------------------------------'
+    print 'Decorated Tweet:'
+    print ''
+    print json.dumps(decorated_tweet, indent=4)
+    print ''
+    print '--- end Decorated Tweet -------------------------------------'
+    print '-----------------------------------------------------------'
