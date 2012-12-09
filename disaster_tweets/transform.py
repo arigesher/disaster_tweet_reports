@@ -12,6 +12,9 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 import copy
+import sys
+import traceback
+import json
 
 MISSING_VALUE = '!__MISSING_VALUE__!'
 
@@ -77,8 +80,16 @@ def decorate_tweet(tweet, decorators):
     for decorator in decorators:
         try:
             scratch_copy = copy.deepcopy(tweet)
-            tweet = decorator.decorate(scratch_copy)
+            scratch_copy = decorator.decorate(scratch_copy)
+            if scratch_copy:
+                tweet = scratch_copy
+            else:
+                sys.stderr.write('Got back null decorated tweet from %s. Input JSON:\n%s\n' % (decorator.name, json.dumps(tweet, indent=4)))
         except Exception, e:
+            exc_type, exc_value, exc_traceback = sys.exc_info()
             # drop this decorator
-            print 'decorator failed (skipping): %s' % e
+            sys.stderr.write('decorator "%s" failed (skipping): %s\n' % (decorator.name, e))
+            traceback.print_exc(file=sys.stderr)
+            sys.stderr.write('Tweet JSON:\n%s' % json.dumps(tweet, indent=3))
+
     return tweet
