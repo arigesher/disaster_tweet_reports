@@ -1,3 +1,13 @@
+## Overview #
+
+Disaster Tweet Reports is intended to be a library and webapp that can be used to quickly generate high-quality, geo-coded information when a disaster strikes.  As Ushahidi proved in the wake of the Haiti earthquake in 2009, SMS can be used to gather small snippets of information.  However, it lacks a lot of the context needed to efficiently use that information to drive disaster response.  Modern mobile Twitter clients, like Twitter's iOS and Android apps or third-party apps like Tweetdeck and Tweetbot are familiar, user-friendly applications that can generate geocoded data very simply and most likely are already installed on a user's phone.
+
+The basic archictecture here is:
+1. Create a new twitter handle to collect reports
+2. instruct disaster response personnel/volunteers to direct message reports to the twitter handle
+3. deploy disaster_tweet_reports to filter, and post-process the tweet stream into usable information
+4. ingest that information into some other system to handle the dispatching of work crews, first-responders, etc.
+
 ## Depends #
 * oauth2 - https://github.com/brosner/python-oauth2.git
 * httplib2 - http://code.google.com/p/httplib2/
