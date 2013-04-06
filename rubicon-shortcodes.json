@@ -1,0 +1,80 @@
+{
+    "name": "Team Rubicon Hurricane Sandy",
+    "description": "A sample dictionary for shortcodes based on the work done by Team Rubicon in cleaning up Rockaway after Hurricane Sandy",
+    "separator": "/",
+    "fields": [
+        { 
+            "type": "shortcode",
+            "label": "Report Type",
+            "shortcodes": {
+                "m": "Medical",
+                "h": "Home",
+                "u": "Utility",
+                "t": "Transportation",
+                "v": "Vehicle",
+                "s": "Security",
+                "o": "Other"
+            },
+
+        },
+        {
+            "type": "shortcode",
+            "label": "priority",
+            "shortcodes": {
+                "1": "Emergency",
+                "2": "Urgent",
+                "3": "Standard",
+                "4": "Low"
+            }
+        },
+        {
+            "type": "text",
+            "label": "Contact Name",
+        },
+        {
+            "type": "text",
+            "label": "Contact Phone",
+        },
+        {
+            "type": "magic text",
+            "label": "Description",
+            "shortcodes": {
+                "muck": "Muck Out",
+                "ment": "Mental Health Services Needed",
+            }
+        },
+        {
+            "type": "magic list",
+            "label": "Tools",
+            "shortcodes": {
+                "ds": "Decontamination Suit",
+                "b": "Cleanup Bags",
+                "sl": "Sledgehammers",
+                "sh": "Shovels"
+            }
+        },
+        {
+            "type": "text",
+            "label": "Team Size"
+        },
+        {
+            "type": "magic text",
+            "label": "Reporting Organization",
+            "shortcodes": {
+                "TR": "Team Rubicon",
+                "ARC": "American Red Cross",
+                "OS": "Occupy Sandy",
+                "UW": "United Way",
+                "NYC": "New York Cares",
+                "AC": "Americorps",
+                "POL": "Points of Light",
+                "M": "Mormon",
+                "JWS": "Jewish World Service"
+            }
+        },
+        {
+            "type": "text",
+            "label": "Notes"
+        }
+    ]
+}
