@@ -57,7 +57,7 @@ class GoogleReverseGeocoder(Decorator):
         Decorator.__init__(self, "Google Reverse Geocoder")
         self.attach_full_info = attach_full_info
 
-    def decorate(self, tweet):
+    def decorate(self, trimmed_tweet, original_tweet):
         ''' Coordinates JSON block in tweet looks like this:
 
             "coordinates": {
@@ -69,17 +69,17 @@ class GoogleReverseGeocoder(Decorator):
             }
         '''
         # make sure we have what we need
-        if u'coordinates' in tweet:
-            coordinate_obj = tweet[u'coordinates']
+        if u'coordinates' in trimmed_tweet:
+            coordinate_obj = trimmed_tweet[u'coordinates']
             if coordinate_obj and u'type' in coordinate_obj and coordinate_obj[u'type'] == u'Point':
                 if u'coordinates' in coordinate_obj:
                     longlat = coordinate_obj[u'coordinates']
                     coordinates = longlat.reverse()
                     coordinates = ",".join(map(lambda x: str(x), longlat))
-                    self.reverse_geocode_tweet(tweet, coordinates)
-                    return tweet
-        # when in doubt, just return the unchanged tweet
-        return tweet
+                    self.reverse_geocode_tweet(trimmed_tweet, coordinates)
+                    return trimmed_tweet
+        # when in doubt, just return the unchanged trimmed_tweet
+        return trimmed_tweet
 
     def reverse_geocode_tweet(self, tweet, coordinates):
         http = httplib2.Http()
