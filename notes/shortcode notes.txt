@@ -1,0 +1,78 @@
+json notes:
+
+Field types:
+    - short code expansion
+    - text
+    - magic text (optionally expanded free form text)
+    - magic list (optionall expanded list of shortcodes or full text, comma-seperated)
+    - numeric
+    - list
+    - lookup
+
+    { "type",
+      "label",
+      {"dictionary"}
+
+
+
+      {
+    "cheat sheet" : "
+(RP/C/Ph/D/S/O)
+
+h3/Cecilia/917-555-5555/muck/6/bags,sledge/NYC/Notes
+
+Report Type (R) 
+
+m = medical
+h = home
+u = utility
+t = transportation
+v = vehicle
+
+Priority (P)
+
+1 = emergency
+2 = urgent
+3 = standard
+4 = non-urgent
+
+Contact Name (C)
+
+text
+
+Phone Number (Ph)
+
+numerical value
+
+Description (D)
+
+muck = muck out
+ment = mental health services
+
+Team Size Needed (S)
+
+numerical value
+
+Special Tools (T)
+
+dsuit = decontamination suit
+bags = cleanup bags
+shovel = shovel
+sledge = sledgehammers
+
+Organization (O)
+
+TR = Team Rubicon
+ARC = American Red Cross
+OS = Occupy Sandy
+UW = United Way
+NYC = NY Cares
+AC = Americorps
+POL = Points of Light
+M = Morman 
+JWS = Jewish World Service
+
+Notes
+",
+
+}
