@@ -17,9 +17,9 @@
 from disaster_tweets.twitter_api import TwitterAPI
 import json
 from disaster_tweets.transform import trim_tweet
-from disaster_tweets.transform import RemoveHandle
 from disaster_tweets.transform import decorate_tweet
 from disaster_tweets.GoogleReverseGeocoder import GoogleReverseGeocoder
+from disaster_tweets.TwimgImageDataDecorator import TwimgImageDataDecorate
 
 # read the keys from a file (that's not in git)
 execfile('keys.txt')
@@ -37,7 +37,7 @@ tweet_objs = json.loads(tweets)
 #print json.dumps(tweet_objs[0], indent=3)
 
 #decorators = (RemoveHandle('remove handle', handle), ReverseGeoCode('reverse geocode'))
-decorators = (RemoveHandle('remove handle', handle), GoogleReverseGeocoder())
+decorators = (GoogleReverseGeocoder(), TwimgImageDataDecorate())
 
 for tweet in tweet_objs:
 
@@ -61,7 +61,7 @@ for tweet in tweet_objs:
     print '*** end Trimmed Tweet *************************************'
     print '***********************************************************'
 
-    decorated_tweet = decorate_tweet(trimmed_tweet, decorators)
+    decorated_tweet = decorate_tweet(trimmed_tweet, tweet, decorators)
 
     print '-----------------------------------------------------------'
     print 'Decorated Tweet:'
