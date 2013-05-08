@@ -1,3 +1,49 @@
+# Disaster Tweet Reports
+
+## The Need For High Quality Disaster Reports
+
+Effective disaster recovery is aided by quick and accurate damage assements so that volunteers and material can be efficiently
+put to use in a timely manner.  Smartphones make a great tool for crafting reports that contain geocoordinates obtained from GPS
+hardware, including photos that are stamped with geocoordinates (lat/long).  However, building special purpose software for this task to work 
+across handsets of all different types is a pretty herculean task - much more ideal to come up a with a reporting protocol that will
+work with pretty much any combination of hardware and operating system.
+
+Enter Twitter as a platform for disaster reporting - Twitter clients are already maintained for almost every handset in existence and most
+of them allow the direct attachment of geocoordinates to a tweet.  Twitter clients also handle the upload and attachment of photos to tweets.
+Given this, Twitter makes a great conduit for getting high quality reports as part of disaster recovery operations.
+
+## Constraints On Such A System
+
+* Disaster reports can contain sensitive, personally identifiable information (PII) about people at their most vulnerable.  Rather than wanting
+to provide looters and predatory contractors with public information about where to focus their malicious efforts, we use direct messages to keep
+the data private.
+* 140 characters (less when inluding image urls for uploaded photos) can be a pretty tight bound on a disaster report.  However, it turns out that
+most disaster recovery reports are very similar as disasters tend to produce clear modalities of damage (like flooding, structural damage, etc). This allows us to create short code dictionaries that allow for a compact notation for most of the data contained in a report.  The software will
+then expand the short codes into a more readable format as they come into the system.
+* This system will require working wireless data infrastructure.  While this is often the case, very serious damage could make this effort useless
+until the data networks are repaired in disaster areas.
+
+## Operational Outline
+
+# Each disaster recovery operation will require the creation of a new (or reuse of an existing) dedicated twitter handle to serve as the endpoint to send direct message traffic to.
+# Once the handle has been created the proper API keys created, the software can be configured and brought up.
+# Volunteers then direct their Twitter account to follow the endpoint handle.  Auto-follow will follow them back (to enable direct messaging) and send them a link to web version of instruction for filing reports on this instance.
+# Tweets begin to flow - recovery happens through the hard work of volunteers
+
+## What The Code Does
+
+While tweets started with humble beginnings as simple SMS messages, the modern tweet is a thing to behold, clocking in at 135 *lines* of pretty-printed JSON data, including everything from the author's icon to geeocordinates to parent tweets in a threaded tweet conversation.
+
+The stated goal of this project is to two things to the data in a disaster report tweet:
+
+# Trim out all information that's unecessary for disaster recovery operations
+# Decorate the remaining JSON with useful data from other web services
+# Transform the data into simpler data structures or cleaned up text
+
+The ultimate goal being the creation of clean and useful data for ingestion into various disaster management systems.
+
+# Technical Info
+
 ## Depends #
 * oauth2 - https://github.com/brosner/python-oauth2.git
 * httplib2 - http://code.google.com/p/httplib2/
