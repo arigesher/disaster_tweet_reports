@@ -13,8 +13,10 @@
 #   limitations under the License.from transform import Decorator
 import json
 import re
+from transform import Decorator
 
 split_re = re.compile('/')
+
 
 class ShortCodeDictionary(Decorator):
 
@@ -22,16 +24,60 @@ class ShortCodeDictionary(Decorator):
         Decorator.__init__(self)
         self.json_dictionary = json_dictionary
         self.alphabet = json.loads(json_dictionary)
-        if not self.alphabet['fields']
-        #TODO
+
+        # make sure we have field definitions
+        if not self.alphabet['fields']:
+            alphabet_dump = json.dumps(self.alphabet, indent=3)
+            raise ValueError('Can\'t find field definitions in short code alphabet:\n%s' % (alphabet_dump))
+        else:
+            # build up field expanders
+            self.expanders = []
+            for field in self.alphabet['fields']:
+                self.expanders.append(FieldExpander(field))
 
     def decorate(self, trimmed_tweet, original_tweet):
-        text = tweet[u'pretty_text']
-        data = split_re.split(data)
-        fields = self.alphabet[]
-        expansion = []
+        text = trimmed_tweet[u'pretty_text']
+        # preserve the unexpanded text
+        trimmed_tweet[u'unexpanded_text'] = text
+        data = split_re.split(text)
+        fields = self.alphabet
+        for i in len(fields):
+            expander = self.expanders[i]
+            datum = data[i]
+            (expanded_text, expanded_json) = expander.expand(datum)
         #TODO
-
 
     def output_cheat_sheet(path):
         raise NotImplementedError()
+
+
+class FieldExpander:
+
+    def __init__(self, json_field_definition):
+        self.field_definition = json_field_definition
+
+    def expand(self, expansion_text):
+        expanded_json = {}
+
+        # start with the label
+        label = self.field_definition[u'label']
+        field_type = self.field_definition[u'type']
+
+        if field_type == 'shortcode':
+            expander = self.expand_shortcode
+        elif field_type == 'text':
+            expander = self.expand_text
+        elif field_type == "magic text":
+            expander = self.expand_magic_text
+
+        expanded_text = expander(expansion_text)
+        expanded_json[label] = expanded_text
+
+        expanded_text = '%s: %s' % (label, expanded_text)
+
+        return (expanded_text, expanded_json)
+
+    def expand_text(expansion_text):
+        # TODO
+        pass
+        
