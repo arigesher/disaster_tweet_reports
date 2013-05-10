@@ -74,11 +74,11 @@ class RemoveHandle(Decorator):
         Decorator.__init__(self, name)
         self.handle_re = re.replace('^(d \S+\s+|\S+\s+)')
 
-    def decorate(self, trimmed_tweet, tweet):
-        text = tweet[u'text']
+    def decorate(self, trimmed_tweet, original_tweet):
+        text = original_tweet[u'text']
         pretty_text = self.handle_re.sub('', text)
-        tweet[u'pretty_text'] = pretty_text
-        return tweet
+        trimmed_tweet[u'pretty_text'] = pretty_text
+        return trimmed_tweet
 
 
 def decorate_tweet(trimmed_tweet, original_tweet, decorators):
