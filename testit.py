@@ -24,11 +24,10 @@ from disaster_tweets.TwimgImageDataDecorator import TwimgImageDataDecorate
 # read the keys from a file (that's not in git)
 execfile('keys.txt')
 
-handle = 'gesherapi'
+handle = 'MITHackersWB'
 
 # parameters loaded from keys.txt
 twitter = TwitterAPI(twitter_consumer_key, twitter_consumer_secret, twitter_access_token, twitter_access_secret)
-
 tweets = twitter.get_mentions()
 tweet_objs = json.loads(tweets)
 #print tweet_objs[0]

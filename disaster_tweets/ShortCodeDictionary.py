@@ -78,6 +78,19 @@ class FieldExpander:
         return (expanded_text, expanded_json)
 
     def expand_text(expansion_text):
-        # TODO
-        pass
-        
+        return self.field_definition[u'label'] + " " expansion_text 
+    def expand_shortcode(expansion_text):
+        scodes = self.field_definition[u'shortcodes']
+        newText = scodes[expansion_text]
+        newText = self.field_definition[u'label'] + " " + newText        
+        return newText
+    def expand_magic_text(expansion_text):
+        scodes = self.field_definition[u'shortcodes']
+        newText = scodes[expansion_text]
+        newText = self.field_definition[u'label'] + " " + newText        
+        return newText
+    def expand_magic_list(expansion_text):
+        scodes = self.field_definition[u'shortcodes']
+        newText = scodes[expansion_text]
+        newText = self.field_definition[u'label'] + " " + newText        
+        return newText

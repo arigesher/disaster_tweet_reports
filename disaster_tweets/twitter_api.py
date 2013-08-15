@@ -25,7 +25,7 @@ class TwitterAPI:
         self.access_token = access_token
         self.access_secret = access_secret
 
-    def oauth_req(self, url, http_method="GET", post_body=None, http_headers=None):
+    def oauth_req(self, url, http_method="GET", post_body="", http_headers=""):
         consumer = oauth.Consumer(self.consumer_key, self.consumer_secret)
         token = oauth.Token(self.access_token, self.access_secret)
         client = oauth.Client(consumer, token)
@@ -34,9 +34,10 @@ class TwitterAPI:
             url,
             method=http_method,
             body=post_body,
-            headers=http_headers,
-            force_auth_header=True
+            headers=http_headers
+            #force_auth_header=True
         )
+
 
         if resp['status'] != '200':
             try:
@@ -53,4 +54,5 @@ class TwitterAPI:
         if (max_id > 0):
             max_id_param = 'since_id=%s&' % max_id
         (metadata, mentions_json) = self.oauth_req('%s?%scontributor_details=true' % (MENTIONS_URL, max_id_param))
+        print 'hi'
         return mentions_json
