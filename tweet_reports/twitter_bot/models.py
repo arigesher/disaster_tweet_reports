@@ -2,8 +2,8 @@ from django.db import models
 
 # Create your models here.
 
-#The "Bot" i.e. TwitterBot that aggregates tweets from followers
-class Bot(models.Model):
+#The "TwitterBot" i.e. TwitterBot that aggregates tweets from followers
+class TwitterBot(models.Model):
 	twitter_handle = models.CharField(max_length=30)
 	oauth_token  = models.CharField(max_length=200)
 	oauth_secret = models.CharField(max_length=200)
@@ -13,7 +13,7 @@ class Bot(models.Model):
 
 #The parsed version of an incoming tweet
 class Update(models.Model):
-	bot = models.ForeignKey(Bot) #which Bot the Update is associated with
+	TwitterBot = models.ForeignKey(TwitterBot) #which Bot the Update is associated with
 	tweet_text = models.CharField(max_length=1000)
 
 	#handle the tweet came from
