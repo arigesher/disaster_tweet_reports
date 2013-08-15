@@ -34,12 +34,12 @@ then expand the short codes into a more readable format as they come into the sy
 * This system will require working wireless data infrastructure.  While this is often the case, very serious damage could make this effort useless
 until the data networks are repaired in disaster areas.
 
-## Operational Outline
+## Operational Outline ##
 
-# Each disaster recovery operation will require the creation of a new (or reuse of an existing) dedicated twitter handle to serve as the endpoint to send direct message traffic to.
-# Once the handle has been created the proper API keys created, the software can be configured and brought up.
-# Volunteers then direct their Twitter account to follow the endpoint handle.  Auto-follow will follow them back (to enable direct messaging) and send them a link to web version of instruction for filing reports on this instance.
-# Tweets begin to flow - recovery happens through the hard work of volunteers
+1. Each disaster recovery operation will require the creation of a new (or reuse of an existing) dedicated twitter handle to serve as the endpoint to send direct message traffic to.
+2. Once the handle has been created the proper API keys created, the software can be configured and brought up.
+3. Volunteers then direct their Twitter account to follow the endpoint handle.  Auto-follow will follow them back (to enable direct messaging) and send them a link to web version of instruction for filing reports on this instance.
+4. Tweets begin to flow - recovery happens through the hard work of volunteers
 
 ## What The Code Does
 
@@ -47,9 +47,9 @@ While tweets started with humble beginnings as simple SMS messages, the modern t
 
 The stated goal of this project is to two things to the data in a disaster report tweet:
 
-# Trim out all information that's unecessary for disaster recovery operations
-# Decorate the remaining JSON with useful data from other web services
-# Transform the data into simpler data structures or cleaned up text
+1. Trim out all information that's unecessary for disaster recovery operations
+2. Decorate the remaining JSON with useful data from other web services
+3. Transform the data into simpler data structures or cleaned up text
 
 The ultimate goal being the creation of clean and useful data for ingestion into various disaster management systems.
 
