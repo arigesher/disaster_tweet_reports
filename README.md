@@ -67,6 +67,16 @@ The ultimate goal being the creation of clean and useful data for ingestion into
 * Downloading and including image data in final JSON blob for easy integration of imagery
 * Better documentation around setting up and deploying in an operational situation
 
+### Short Term Work To Done
+
+Getting to an minimal viable product will need the following things:
+
+1. A working Django app to display, download, and make available via API all the collected tweets
+2. The devops and packaging work to make this as simple and robust as possible to deploy
+3. The data pipe that will periodically and reliably pull the data from twitter
+4. Various administrative modules to do things like auto-follow accounts and send out instructions
+5. Operations time documentation on setting up and operating the system in a real disaster scenario
+
 ## Example output
 
 Here's an example using the default trimming routines along with the Google Reverse Geocoder:
